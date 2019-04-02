@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="slf4j">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src" />
+    </SOURCES>
+  </library>
+</component>
