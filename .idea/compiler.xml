@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="8" />
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="edgent-analytics-math3" />
+        <module name="edgent-analytics-sensors" />
+        <module name="edgent-api-execution" />
+        <module name="edgent-api-function" />
+        <module name="edgent-api-graph" />
+        <module name="edgent-api-oplet" />
+        <module name="edgent-api-topology" />
+        <module name="edgent-api-window" />
+        <module name="edgent-apps-iot" />
+        <module name="edgent-apps-runtime" />
+        <module name="edgent-connectors-command" />
+        <module name="edgent-connectors-common" />
+        <module name="edgent-connectors-csv" />
+        <module name="edgent-connectors-file" />
+        <module name="edgent-connectors-http" />
+        <module name="edgent-connectors-iot" />
+        <module name="edgent-connectors-iotp" />
+        <module name="edgent-connectors-jdbc" />
+        <module name="edgent-connectors-kafka" />
+        <module name="edgent-connectors-mqtt" />
+        <module name="edgent-connectors-pubsub" />
+        <module name="edgent-connectors-serial" />
+        <module name="edgent-connectors-websocket" />
+        <module name="edgent-connectors-websocket-base" />
+        <module name="edgent-connectors-websocket-jetty" />
+        <module name="edgent-connectors-websocket-misc" />
+        <module name="edgent-connectors-websocket-server" />
+        <module name="edgent-console-server" />
+        <module name="edgent-console-servlets" />
+        <module name="edgent-providers-development" />
+        <module name="edgent-providers-direct" />
+        <module name="edgent-providers-iot" />
+        <module name="edgent-runtime-appservice" />
+        <module name="edgent-runtime-etiao" />
+        <module name="edgent-runtime-jmxcontrol" />
+        <module name="edgent-runtime-jobregistry" />
+        <module name="edgent-runtime-jsoncontrol" />
+        <module name="edgent-spi-graph" />
+        <module name="edgent-spi-topology" />
+        <module name="edgent-test-appservice-applications" />
+        <module name="edgent-test-fvtiot" />
+        <module name="edgent-test-svt" />
+        <module name="edgent-utils-metrics" />
+        <module name="edgent-utils-streamscope" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="edgent-analytics" target="1.6" />
+      <module name="edgent-analytics-math3" target="1.8" />
+      <module name="edgent-analytics-sensors" target="1.8" />
+      <module name="edgent-api" target="1.6" />
+      <module name="edgent-api-execution" target="1.8" />
+      <module name="edgent-api-function" target="1.8" />
+      <module name="edgent-api-graph" target="1.8" />
+      <module name="edgent-api-oplet" target="1.8" />
+      <module name="edgent-api-topology" target="1.8" />
+      <module name="edgent-api-window" target="1.8" />
+      <module name="edgent-apps" target="1.6" />
+      <module name="edgent-apps-iot" target="1.8" />
+      <module name="edgent-apps-runtime" target="1.8" />
+      <module name="edgent-connectors" target="1.6" />
+      <module name="edgent-connectors-command" target="1.8" />
+      <module name="edgent-connectors-common" target="1.8" />
+      <module name="edgent-connectors-csv" target="1.8" />
+      <module name="edgent-connectors-file" target="1.8" />
+      <module name="edgent-connectors-http" target="1.8" />
+      <module name="edgent-connectors-iot" target="1.8" />
+      <module name="edgent-connectors-iotp" target="1.8" />
+      <module name="edgent-connectors-jdbc" target="1.8" />
+      <module name="edgent-connectors-kafka" target="1.8" />
+      <module name="edgent-connectors-mqtt" target="1.8" />
+      <module name="edgent-connectors-pubsub" target="1.8" />
+      <module name="edgent-connectors-serial" target="1.8" />
+      <module name="edgent-connectors-websocket" target="1.8" />
+      <module name="edgent-connectors-websocket-base" target="1.8" />
+      <module name="edgent-connectors-websocket-jetty" target="1.8" />
+      <module name="edgent-connectors-websocket-misc" target="1.8" />
+      <module name="edgent-connectors-websocket-server" target="1.8" />
+      <module name="edgent-console" target="1.6" />
+      <module name="edgent-console-server" target="1.8" />
+      <module name="edgent-console-servlets" target="1.8" />
+      <module name="edgent-parent" target="1.6" />
+      <module name="edgent-platforms" target="1.6" />
+      <module name="edgent-providers" target="1.6" />
+      <module name="edgent-providers-development" target="1.8" />
+      <module name="edgent-providers-direct" target="1.8" />
+      <module name="edgent-providers-iot" target="1.8" />
+      <module name="edgent-runtime" target="1.6" />
+      <module name="edgent-runtime-appservice" target="1.8" />
+      <module name="edgent-runtime-etiao" target="1.8" />
+      <module name="edgent-runtime-jmxcontrol" target="1.8" />
+      <module name="edgent-runtime-jobregistry" target="1.8" />
+      <module name="edgent-runtime-jsoncontrol" target="1.8" />
+      <module name="edgent-spi" target="1.6" />
+      <module name="edgent-spi-graph" target="1.8" />
+      <module name="edgent-spi-topology" target="1.8" />
+      <module name="edgent-test" target="1.6" />
+      <module name="edgent-test-appservice-applications" target="1.8" />
+      <module name="edgent-test-fvtiot" target="1.8" />
+      <module name="edgent-test-svt" target="1.8" />
+      <module name="edgent-utils" target="1.6" />
+      <module name="edgent-utils-metrics" target="1.8" />
+      <module name="edgent-utils-streamscope" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

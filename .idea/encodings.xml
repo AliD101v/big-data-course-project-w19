@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/analytics" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/analytics/math3" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/analytics/sensors" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/api/execution" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/api/function" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/api/graph" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/api/oplet" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/api/topology" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/api/window" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/apps" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/apps/iot" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/apps/runtime" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/command" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/file" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/http" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/iot" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/iotp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/jdbc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/kafka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/mqtt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/pubsub" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/serial" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/websocket" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/websocket-base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/websocket-jetty" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/websocket-misc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/connectors/websocket-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/console" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/console/server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/console/servlets" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/platforms" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/providers" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/providers/development" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/providers/direct" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/providers/iot" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/runtime" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/runtime/appservice" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/runtime/etiao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/runtime/jmxcontrol" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/runtime/jobregistry" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/runtime/jsoncontrol" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/spi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/spi/graph" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/spi/topology" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/test" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/test/appservice-applications" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/test/fvtiot" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/test/svt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/utils/metrics" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/utils/streamscope" charset="UTF-8" />
+  </component>
 </project>
