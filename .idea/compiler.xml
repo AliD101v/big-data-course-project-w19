@@ -50,6 +50,7 @@
         <module name="edgent-test-svt" />
         <module name="edgent-utils-metrics" />
         <module name="edgent-utils-streamscope" />
+        <module name="egads" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -109,6 +110,7 @@
       <module name="edgent-utils" target="1.6" />
       <module name="edgent-utils-metrics" target="1.8" />
       <module name="edgent-utils-streamscope" target="1.8" />
+      <module name="egads" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

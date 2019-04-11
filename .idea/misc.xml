@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Edgent/incubator-edgent-edgent-1.2.0/pom.xml" />
+        <option value="$PROJECT_DIR$/egads/pom.xml" />
       </list>
     </option>
   </component>
