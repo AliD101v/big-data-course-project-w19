@@ -8,15 +8,16 @@ import java.util.Random;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.edgent.function.Supplier;
 
-public class EEGSensor implements Supplier<Integer> {
+public class EEGSensor implements Supplier<Double> {
     double currentTemp = 65.0;
     String fileName;
     CSVParser csvParser;
     Iterator<CSVRecord> csvRecordIterator;
 //    CSVRecord prevRecord;
-    int prevDiff;
+    double prevDiff;
 
     EEGSensor(){
 
@@ -36,17 +37,19 @@ public class EEGSensor implements Supplier<Integer> {
         }
         catch (Exception e){}
 
-        prevDiff = 0;
+        prevDiff = 0.0;
     }
 
     //Returns a new temperature reading randomly, this temp is based off of old temp added to a random modifier
     @Override
-    public Integer get() {
+    public Double get() {
 
         CSVRecord csvRecord;
-        int value = 0;
-        int prevValue = 0;
-        int diff = 0;
+        double value = 0.0;
+        double prevValue = 0.0;
+        double diff = 0.0;
+
+        DescriptiveStatistics ds = new DescriptiveStatistics();
 
         for (int i = 0; i < 178; i++) {
             if (csvRecordIterator.hasNext()) {
@@ -54,7 +57,9 @@ public class EEGSensor implements Supplier<Integer> {
 //                prevRecord = csvRecord;
 
 //                String timestamp = csvRecord.get("timestamp");
-                value = Integer.parseInt(csvRecord.get("value"));
+                value = Double.parseDouble(csvRecord.get("value"));
+
+                ds.addValue(value);
 
                 diff += Math.pow(value - prevValue, 2);
 
@@ -63,14 +68,14 @@ public class EEGSensor implements Supplier<Integer> {
             else // return prevRecord
             {
 //            value = prevVal;
-                if (diff != 0)
+                if (diff != 0.0)
                     return diff;
                 else
                     return prevDiff;
             }
         }
 
-        diff = (int)Math.sqrt(diff);
+//        diff = Math.sqrt(diff);
 
         prevDiff = diff;
 
