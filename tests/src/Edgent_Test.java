@@ -29,7 +29,7 @@ public class Edgent_Test {
     static double OPTIMAL_TEMP_LOW = 77.0;
     static double OPTIMAL_TEMP_HIGH = 91.0;
     static Range<Double> optimalTempRange = Ranges.closed(OPTIMAL_TEMP_LOW, OPTIMAL_TEMP_HIGH);
-    private static final String DATA_FILE = "./data/test_data.csv";
+    private static final String DATA_FILE = "./data/train_data.csv";
 
     public static void main(String[] args) throws Exception {
 

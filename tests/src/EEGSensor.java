@@ -75,7 +75,7 @@ public class EEGSensor implements Supplier<Double> {
             }
         }
 
-//        diff = Math.sqrt(diff);
+        diff = Math.sqrt(diff);
 
         prevDiff = diff;
 
