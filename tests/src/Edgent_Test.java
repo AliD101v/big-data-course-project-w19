@@ -47,7 +47,7 @@ public class Edgent_Test {
 //        TempSensor sensor = new TempSensor();
 //        TStream<Double> temp = topology.poll(sensor, 1, TimeUnit.SECONDS);
         EEGSensor sensor = new EEGSensor(DATA_FILE);
-        TStream<Integer> timeSeriesTStream = topology.poll(sensor, 6, TimeUnit.MILLISECONDS);
+        TStream<Integer> timeSeriesTStream = topology.poll(sensor, 1, TimeUnit.SECONDS);
 
         // Simple filter: Perform analytics on sensor readings to
         // detect when the temperature is completely out of the

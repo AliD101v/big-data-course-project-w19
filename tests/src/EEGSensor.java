@@ -12,11 +12,11 @@ import org.apache.edgent.function.Supplier;
 
 public class EEGSensor implements Supplier<Integer> {
     double currentTemp = 65.0;
-    Random rand;
     String fileName;
     CSVParser csvParser;
     Iterator<CSVRecord> csvRecordIterator;
-    CSVRecord prevRecord;
+//    CSVRecord prevRecord;
+    int prevDiff;
 
     EEGSensor(){
 
@@ -35,6 +35,8 @@ public class EEGSensor implements Supplier<Integer> {
             csvRecordIterator = csvParser.iterator();
         }
         catch (Exception e){}
+
+        prevDiff = 0;
     }
 
     //Returns a new temperature reading randomly, this temp is based off of old temp added to a random modifier
@@ -43,21 +45,36 @@ public class EEGSensor implements Supplier<Integer> {
 
         CSVRecord csvRecord;
         int value = 0;
+        int prevValue = 0;
+        int diff = 0;
 
-        if (csvRecordIterator.hasNext()) {
-            csvRecord = csvRecordIterator.next();
-            prevRecord = csvRecord;
+        for (int i = 0; i < 178; i++) {
+            if (csvRecordIterator.hasNext()) {
+                csvRecord = csvRecordIterator.next();
+//                prevRecord = csvRecord;
 
-            String timestamp = csvRecord.get("timestamp");
-            value = Integer.parseInt(csvRecord.get("value"));
+//                String timestamp = csvRecord.get("timestamp");
+                value = Integer.parseInt(csvRecord.get("value"));
+
+                diff += Math.pow(value - prevValue, 2);
+
+                prevValue = value;
+            }
+            else // return prevRecord
+            {
+//            value = prevVal;
+                if (diff != 0)
+                    return diff;
+                else
+                    return prevDiff;
+            }
         }
-        else // return prevRecord
-        {
-            String timestamp = prevRecord.get("timestamp");
-            value = Integer.parseInt(prevRecord.get("value"));
-        }
 
-        return value;
+        diff = (int)Math.sqrt(diff);
+
+        prevDiff = diff;
+
+        return diff;
     }
 
     private void readCSV() throws IOException
