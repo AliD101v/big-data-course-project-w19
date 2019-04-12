@@ -11,6 +11,9 @@ import dask.bag as db
 import dask.dataframe as df  # you can use Dask bags or dataframes
 from csv import reader
 
+from pandas import Series
+from matplotlib import pyplot
+
 #Initialize a spark session.
 def init_spark():
     spark = SparkSession \
@@ -22,12 +25,25 @@ def init_spark():
 
 spark = init_spark()
 
-filename = '../data/train_data.csv'
-# ADD YOUR CODE HERE
-df = spark.read.format("csv").option("header", "true").load(filename)
-df.show()
-df.summary()
-print(df.count())
-row1 = df.agg({"value": "max"}).collect()[0]
-# print('max is: ' + row1["max()"])
-print('max is: ' + str(row1))
+# filename = '../data/train_data.csv'
+origDataFilename = '../data/data.csv'
+## Read the files
+# # df = spark.read.format("csv").option("header", "true").load(filename)
+df_orig = spark.read.format("csv").option("header", "true").load(origDataFilename)
+
+
+# # df_orig.show()
+# # class1Count = df_orig.rdd.map(lambda x: x[-1]).filter(lambda x: x == 1).count()
+# dataCount = df_orig.count()
+# class1Count = df_orig.select('y').filter('y == 1').count()
+# # print(df.count())
+# # row1 = df.agg({"value": "max"}).collect()[0]
+# # print('max is: ' + row1["max()"])
+# # print('max is: ' + str(row1))
+
+# print('All data count: ' + str(dataCount))
+# print('Class 1 (epilepsy seizure) count: ' + str(class1Count))
+
+# series = Series.from_csv('../data/data_new.csv', header=1)
+# series.iloc[:178].plot()
+# pyplot.show()

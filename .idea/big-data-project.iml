@@ -65,5 +65,6 @@
     <orderEntry type="module" module-name="edgent-test-svt" />
     <orderEntry type="module" module-name="edgent-utils-streamscope" />
     <orderEntry type="module" module-name="egads" />
+    <orderEntry type="library" name="org.apache.commons:commons-csv:1.6" level="application" />
   </component>
 </module>
