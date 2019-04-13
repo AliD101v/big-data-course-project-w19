@@ -49,6 +49,22 @@ public class EEGSensor implements Supplier<Double> {
         double prevValue = 0.0;
         double diff = 0.0;
 
+
+
+
+        if (csvRecordIterator.hasNext()) {
+            csvRecord = csvRecordIterator.next();
+            value = Double.parseDouble(csvRecord.get("value"));
+            return value;
+        }
+        else
+            System.exit(0);
+
+
+
+
+
+/*
         DescriptiveStatistics ds = new DescriptiveStatistics();
 
         for (int i = 0; i < 178; i++) {
@@ -79,7 +95,7 @@ public class EEGSensor implements Supplier<Double> {
 
         prevDiff = diff;
 
-        return diff;
+        return diff;*/
     }
 
     private void readCSV() throws IOException

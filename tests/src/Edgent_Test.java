@@ -31,6 +31,10 @@ public class Edgent_Test {
     static Range<Double> optimalTempRange = Ranges.closed(OPTIMAL_TEMP_LOW, OPTIMAL_TEMP_HIGH);
     private static final String DATA_FILE = "./data/train_data.csv";
 
+    double value = 0.0;
+    double prevValue = 0.0;
+    double diff = 0.0;
+
     public static void main(String[] args) throws Exception {
 
         try {
@@ -47,7 +51,10 @@ public class Edgent_Test {
 //        TempSensor sensor = new TempSensor();
 //        TStream<Double> temp = topology.poll(sensor, 1, TimeUnit.SECONDS);
         EEGSensor sensor = new EEGSensor(DATA_FILE);
-        TStream<Double> timeSeriesTStream = topology.poll(sensor, 1, TimeUnit.SECONDS);
+        TStream<Double> timeSeriesTStream = topology.poll(sensor, 6, TimeUnit.MILLISECONDS);
+
+        EEGAnalyzer analyzer = new EEGAnalyzer();
+        timeSeriesTStream.sink(analyzer);
 
         // Simple filter: Perform analytics on sensor readings to
         // detect when the temperature is completely out of the
@@ -69,7 +76,7 @@ public class Edgent_Test {
 //        TStream<Double> deadbandFiltered = Filters.deadband(timeSeriesTStream, identity(), optimalTempRange);
 
         // See what the timeSeries look like
-        timeSeriesTStream.print();
+//        timeSeriesTStream.print();
 
         dp.submit(topology);
 
