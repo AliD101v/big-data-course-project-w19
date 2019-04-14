@@ -1,39 +1,19 @@
-import static org.apache.edgent.function.Functions.identity;
-
-import java.rmi.server.ExportException;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.edgent.analytics.sensors.Filters;
-import org.apache.edgent.analytics.sensors.Range;
-import org.apache.edgent.analytics.sensors.Ranges;
 //import org.apache.edgent.samples.utils.sensor.SimulatedTemperatureSensor;
-import org.apache.edgent.oplet.functional.Filter;
+import org.apache.edgent.execution.Job;
 import org.apache.edgent.providers.direct.DirectProvider;
 import org.apache.edgent.topology.TStream;
 import org.apache.edgent.topology.Topology;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.concurrent.Future;
 
 public class Edgent_Test {
-
-    /**
-     * Optimal temperature range (in Fahrenheit)
-     */
-    static double OPTIMAL_TEMP_LOW = 77.0;
-    static double OPTIMAL_TEMP_HIGH = 91.0;
-    static Range<Double> optimalTempRange = Ranges.closed(OPTIMAL_TEMP_LOW, OPTIMAL_TEMP_HIGH);
-    private static final String DATA_FILE = "./data/train_data.csv";
-
-    double value = 0.0;
-    double prevValue = 0.0;
-    double diff = 0.0;
+    private static final double MIN_SQ_SUM_DIFF_TRAIN = 550;
+    private static final String TRAIN_DATA_FILE = "./data/train_data.csv";
+    private static final String TEST_DATA_FILE = "./data/test_data.csv";
+    private static final String CLASS_TRAIN_DATA_FILE = "./data/y_train_data.csv";
+    private static final String CLASS_TEST_DATA_FILE = "./data/y_test_data.csv";
+    private static final int TRAIN_DATA_SIZE = 7000;
+    private static final int TEST_DATA_SIZE = 4500;
 
     public static void main(String[] args) throws Exception {
 
@@ -50,11 +30,35 @@ public class Edgent_Test {
         // Generate a stream of temperature sensor readings
 //        TempSensor sensor = new TempSensor();
 //        TStream<Double> temp = topology.poll(sensor, 1, TimeUnit.SECONDS);
-        EEGSensor sensor = new EEGSensor(DATA_FILE);
-        TStream<Double> timeSeriesTStream = topology.poll(sensor, 6, TimeUnit.MILLISECONDS);
 
-        EEGAnalyzer analyzer = new EEGAnalyzer();
-        timeSeriesTStream.sink(analyzer);
+        // Analyze the training data
+//        EEGSensor sensorTrain = new EEGSensor(TRAIN_DATA_FILE);
+//        TStream<Double> trainStream = topology.generate(sensorTrain);
+//
+//        EEGMapper trainMapper = new EEGMapper(TRAIN_DATA_SIZE);
+//        TStream<Double> trainMapStream = trainStream.map(trainMapper);
+//
+//        EEGAnalyzer trainAnalyzer = new EEGAnalyzer(TRAIN_DATA_SIZE, CLASS_TRAIN_DATA_FILE, MIN_SQ_SUM_DIFF_TRAIN, "training");
+//        trainMapStream.sink(trainAnalyzer);
+
+
+        // Analyze the test data
+        EEGSensor sensorTest = new EEGSensor(TEST_DATA_FILE);
+        TStream<Double> testStream = topology.generate(sensorTest);
+
+        EEGMapper testMapper = new EEGMapper(TEST_DATA_SIZE);
+        TStream<Double> testMapStream = testStream.map(testMapper);
+
+        EEGAnalyzer testAnalyzer = new EEGAnalyzer(TEST_DATA_SIZE, CLASS_TEST_DATA_FILE, MIN_SQ_SUM_DIFF_TRAIN, "test");
+        testMapStream.sink(testAnalyzer);
+
+
+        // Minimum squared sum of consecutive pairwise differences for class 1 (train_data.csv)
+        // is 185.15897934245874
+//        EEGTrainer trainer = new EEGTrainer(DATA_SIZE, CLASS_DATA_FILE);
+//        mapStream.sink(trainer);
+
+
 
         // Simple filter: Perform analytics on sensor readings to
         // detect when the temperature is completely out of the
@@ -78,7 +82,7 @@ public class Edgent_Test {
         // See what the timeSeries look like
 //        timeSeriesTStream.print();
 
-        dp.submit(topology);
+        Future<Job> job = dp.submit(topology);
 
     }
 }

@@ -4,20 +4,25 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.concurrent.Future;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.edgent.execution.Job;
 import org.apache.edgent.function.Supplier;
 
+
+
 public class EEGSensor implements Supplier<Double> {
-    double currentTemp = 65.0;
     String fileName;
     CSVParser csvParser;
     Iterator<CSVRecord> csvRecordIterator;
-//    CSVRecord prevRecord;
     double prevDiff;
+
+    // the job will be cancelled once the data file is finished reading
+//    Future<Job> job;
 
     EEGSensor(){
 
@@ -46,11 +51,8 @@ public class EEGSensor implements Supplier<Double> {
 
         CSVRecord csvRecord;
         double value = 0.0;
-        double prevValue = 0.0;
-        double diff = 0.0;
-
-
-
+//        double prevValue = 0.0;
+//        double diff = 0.0;
 
         if (csvRecordIterator.hasNext()) {
             csvRecord = csvRecordIterator.next();
@@ -58,11 +60,7 @@ public class EEGSensor implements Supplier<Double> {
             return value;
         }
         else
-            System.exit(0);
-
-
-
-
+            return null;
 
 /*
         DescriptiveStatistics ds = new DescriptiveStatistics();
@@ -98,27 +96,26 @@ public class EEGSensor implements Supplier<Double> {
         return diff;*/
     }
 
-    private void readCSV() throws IOException
-    {
-        try (
-                Reader reader = Files.newBufferedReader(Paths.get(fileName));
-                CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
-                        .withFirstRecordAsHeader()
-                        .withIgnoreHeaderCase()
-                        .withTrim());
-        ) {
-            for (CSVRecord csvRecord : csvParser) {
-                // Accessing values by Header names
-                String timestamp = csvRecord.get("timestamp");
-                String value = csvRecord.get("value");
-
-                System.out.println("Record No - " + csvRecord.getRecordNumber());
-                System.out.println("---------------");
-                System.out.println("timestamp : " + timestamp);
-                System.out.println("value : " + value);
-                System.out.println("---------------\n\n");
-            }
-        }
-    }
-
+//    private void readCSV() throws IOException
+//    {
+//        try (
+//                Reader reader = Files.newBufferedReader(Paths.get(fileName));
+//                CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
+//                        .withFirstRecordAsHeader()
+//                        .withIgnoreHeaderCase()
+//                        .withTrim());
+//        ) {
+//            for (CSVRecord csvRecord : csvParser) {
+//                // Accessing values by Header names
+//                String timestamp = csvRecord.get("timestamp");
+//                String value = csvRecord.get("value");
+//
+//                System.out.println("Record No - " + csvRecord.getRecordNumber());
+//                System.out.println("---------------");
+//                System.out.println("timestamp : " + timestamp);
+//                System.out.println("value : " + value);
+//                System.out.println("---------------\n\n");
+//            }
+//        }
+//    }
 }
