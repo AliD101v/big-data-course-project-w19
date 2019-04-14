@@ -25,18 +25,23 @@ def init_spark():
 
 spark = init_spark()
 
-# filename = '../data/train_data.csv'
-origDataFilename = '../data/data.csv'
+# data.csv size: 11500 records. Each contains 178 time points per second.
+# train_data.csv size: 1246000 (=7000*178)
+# test_data.csv size: 801000 (=4500*178)
+# data_new.csv size: 2047000 (=11500*178)
+filename = './data/data_new.csv'
+# origDataFilename = '../data/train_data.csv'
 ## Read the files
-# # df = spark.read.format("csv").option("header", "true").load(filename)
-df_orig = spark.read.format("csv").option("header", "true").load(origDataFilename)
+df = spark.read.format("csv").option("header", "true").load(filename)
+# df_orig = spark.read.format("csv").option("header", "true").load(origDataFilename)
 
 
 # # df_orig.show()
 # # class1Count = df_orig.rdd.map(lambda x: x[-1]).filter(lambda x: x == 1).count()
-# dataCount = df_orig.count()
+dataCount = df.count()
+print(dataCount)
 # class1Count = df_orig.select('y').filter('y == 1').count()
-# # print(df.count())
+# print(df.count())
 # # row1 = df.agg({"value": "max"}).collect()[0]
 # # print('max is: ' + row1["max()"])
 # # print('max is: ' + str(row1))
