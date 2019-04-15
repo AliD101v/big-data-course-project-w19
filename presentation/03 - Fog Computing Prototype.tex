@@ -282,22 +282,38 @@ Numbers={OldStyle, Proportional}
 
   %%% Clustering in the Cloud %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \subsection{Cloud Computing}
+
   \begin{frame}
-    \frametitle{Clustering in the Cloud}
+    \frametitle{Cloud Computing}
     \textbf{Inspirations}
     \begin{itemize}
       \item The \textsc{EGADS} anomaly detection library by Yahoo\cite{egads} uses clustering as basis for most of its
       \item Carney et. al.\cite{Carney2011}
     \end{itemize}
-
-    Apache Spark (pyspark/Python)
   
+    \includegraphics[width = \textwidth]{figs/Seizures.png}
+    
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Clustering in the Cloud}
+
+    We tried:
+    \begin{itemize}
+      \item Euclidean distance
+      \item Transform data entries into 178 dimensions      
+    \end{itemize}
+
+    This failed due to different time intervals
+
     \metroset{block=fill}
     \begin{exampleblock}{Selected distance measure}
       \begin{equation*}
         s = \sum_{i=2}^{n}{\left|X_i - X_{i-1}\right|}
       \end{equation*}
     \end{exampleblock}
+
+    Apache Spark (pyspark/Python)
   
   \end{frame}
 
