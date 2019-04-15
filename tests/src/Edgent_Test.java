@@ -17,11 +17,6 @@ public class Edgent_Test {
 
     public static void main(String[] args) throws Exception {
 
-        try {
-
-        }
-        catch (Exception e){}
-
         DirectProvider dp = new DirectProvider();
 
 //        Topology topology = dp.newTopology("TemperatureSensor");

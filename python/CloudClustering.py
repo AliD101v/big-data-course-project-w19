@@ -120,5 +120,5 @@ def test_centroids(test_data, y_data, centroids):
 
 centroids = [13040.672413793103, 1618.5073787772312, 1508.3789398280803, 3533.7969295184926, 2160.4601769911505]
 
-print(test_centroids("test_data.csv", "y_data.csv", centroids))
+print(test_centroids("./data/test_data.csv", "./data/y_data.csv", centroids))
 

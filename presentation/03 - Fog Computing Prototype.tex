@@ -216,7 +216,7 @@ Numbers={OldStyle, Proportional}
   \begin{frame}
     \frametitle{Stream Analysis}
     
-    Different statistical measures: variance, skewness, kurtosis
+    Different statistical measures: variance, skewness, kurtosis \cite{Carney2011}
 
     % \begin{columns}[T,onlytextwidth]
       
@@ -242,7 +242,7 @@ Numbers={OldStyle, Proportional}
 
   \begin{frame}
     \frametitle{Stream Processing at the Edge}
-    \textbf{Apache Edgent:} Programming model and runtime
+    \textbf{Apache Edgent:} Programming model and runtime (Java)
 
     \begin{itemize}
       \item \textbf{Supply} reads the dataset and supplies it as a stream
@@ -289,6 +289,8 @@ Numbers={OldStyle, Proportional}
       \item The \textsc{EGADS} anomaly detection library by Yahoo\cite{egads} uses clustering as basis for most of its
       \item Carney et. al.\cite{Carney2011}
     \end{itemize}
+
+    Apache Spark (pyspark/Python)
   
     \metroset{block=fill}
     \begin{exampleblock}{Selected distance measure}
@@ -311,6 +313,15 @@ Numbers={OldStyle, Proportional}
 
   %%% Conclusion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \section{Conclusion}
+  \begin{frame}[standout]
+    \frametitle{Performance Comparison}
+    
+    \includegraphics[width = \textwidth]{figs/Edgent_Run_Time_Memory.png}
+    \includegraphics[width = \textwidth]{figs/Cloud_Run_Time_Memory.png}
+    
+  
+  \end{frame}
+
   \begin{frame}
     \frametitle{Limitations and Future Work}
     \begin{itemize}

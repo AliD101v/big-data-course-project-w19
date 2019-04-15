@@ -68,6 +68,7 @@ public class EEGAnalyzer implements Consumer<Double> {
                 System.out.println(description);
                 System.out.println("True positives: " + tpCount);
                 System.out.println("False positives: " + fpCount);
+                System.exit(0);
             }
         }
         else
@@ -76,6 +77,8 @@ public class EEGAnalyzer implements Consumer<Double> {
             System.out.println(description);
             System.out.println("True positives: " + tpCount);
             System.out.println("False positives: " + fpCount);
+            System.exit(0);
+
         }
     }
 }
