@@ -36,6 +36,8 @@ Numbers={OldStyle, Proportional}
 % \setsansfont[BoldFont={Fira Sans SemiBold}]{Fira Sans Book}
 
 \usepackage{booktabs}
+% \usepackage{pgfplots}
+% \usepgfplotslibrary{dateplot}
 
 %%% hyperref setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \hypersetup{pdfpagemode=FullScreen,pdffitwindow=true,pdfpagelayout=SinglePage}
@@ -81,7 +83,7 @@ Numbers={OldStyle, Proportional}
 
 \begin{frame}
     \frametitle{Table of Contents}
-    \tableofcontents[currentsection]
+    \tableofcontents
 \end{frame}
 
 % introduction
@@ -190,28 +192,40 @@ Numbers={OldStyle, Proportional}
   \section{Methodology}
   %%% Edge Computing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \subsection{Edge Computing}
-  \begin{frame}
-    \frametitle{Stream Processing at the Edge}
   
+  \begin{frame}
+    \frametitle{Stream Filtering}
+    
     \alert{Goal} Filter the stream for out-of-range tuples/anomalies
     \begin{itemize}
       \item light-weight on resources
       \item fast
     \end{itemize}
-
+    
+    \includegraphics[width = \textwidth]{figs/Seizures.png}
+    
+  \end{frame}
+  
+  \begin{frame}
+    \frametitle{Stream Analysis}
+    
     Different statistical measures: variance, skewness, kurtosis
 
     % \begin{columns}[T,onlytextwidth]
       
     % % \column{0.5\textwidth}
     %   \column{0.5\textwidth}
+    % eeg diagram
+    % edgent and apis, sensor->map->train and analyze
+    % results
       
-      \metroset{block=fill}
-      \begin{exampleblock}{Selected measure}
-        \begin{equation*}
-          \sqrt{\sum_{i=2}^{n}{(X_i - X_{i-1})^2}}
-        \end{equation*}
-      \end{exampleblock}
+    \metroset{block=fill}
+    \begin{exampleblock}{Selected measure}
+      \begin{equation*}
+        \Theta = \sqrt{\sum_{i=2}^{n}{(X_i - X_{i-1})^2}}
+      \end{equation*}
+    \end{exampleblock}
+
       
     % \end{columns}
     
@@ -220,8 +234,40 @@ Numbers={OldStyle, Proportional}
   \note{The first four standardized moments except mean}
 
   \begin{frame}
+    \frametitle{Stream Processing at the Edge}
+    \textbf{Apache Edgent:} Programming model and runtime
+
+    \begin{itemize} % todo use a diagram instead of this list
+      \item \textbf{Supply} reads the dataset and supplies it as a stream
+      \item \textbf{Map} maps the tuples to the selected measure
+      \item \textbf{Analysis} classifies the out-of-range \(\Theta\) values
+      as seizures
+    \end{itemize}
+
+    \includegraphics[width = \textwidth]{figs/Edgent_pipeline.pdf}
+    
+  \end{frame}
+
+  \begin{frame}[standout]
     \frametitle{Results}
+
+    \includegraphics[width = \textwidth]{figs/Edge_Training_Results.pdf}
+    \includegraphics[width = \textwidth]{figs/Edge_Test_Results.pdf}
   
+  %   \begin{figure}
+  %     \begin{tikzpicture}
+  %       \begin{axis}[
+  %         mlineplot,
+  %         width=0.9\textwidth,
+  %         height=6cm,
+  %       ]
+  
+  %         \addplot {sin(deg(x))};
+  %         \addplot+[samples=100] {sin(deg(2*x))};
+  
+  %       \end{axis}
+  %     \end{tikzpicture}
+  % \end{figure}
     
   
   \end{frame}
@@ -232,14 +278,20 @@ Numbers={OldStyle, Proportional}
   \begin{frame}
     \frametitle{Clustering in the Cloud}
   
-    
+    \metroset{block=fill}
+    \begin{exampleblock}{Selected measure}
+      \begin{equation*}
+        s = \sum_{i=2}^{n}{\left|X_i - X_{i-1}\right|}
+      \end{equation*}
+    \end{exampleblock}
   
   \end{frame}
 
 
-  \begin{frame}
+  \begin{frame}[standout]
     \frametitle{Results}
   
+    \includegraphics[width = \textwidth]{figs/Threshold.png}
     
   
   \end{frame}
