@@ -1,0 +1,122 @@
+\documentclass[xelatex]{beamer}
+\usetheme[titleformat title=smallcaps, titleformat section=smallcaps, titleformat frame=smallcaps]{metropolis}
+
+%%% Load packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \usepackage{amsfonts}
+% \usepackage{amssymb}
+% \usepackage{amsthm}
+% \usepackage{amsopn} 
+
+\usepackage{fontspec}
+%[
+%Renderer=Graphite,
+%RawFeature={onum}]
+\setmainfont{Libertinus Serif}[
+Ligatures={Common,TeX},
+Numbers={OldStyle, Proportional}
+]
+\setsansfont{Libertinus Sans}[
+  Ligatures={Common,TeX},
+  Numbers={OldStyle, Proportional}
+  ]
+\setmonofont{Libertinus Mono}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmathfont[Scale=0.85]{Libertinus Math}
+
+% \usefonttheme{professionalfonts} % required for mathspec
+% \usepackage{mathspec}
+% \setmathsfont(Digits,Latin)[Numbers={Lining, Proportional},Scale=MatchLowercase]{Libertinus Math}
+% 
+
+
+% Use for large room or with an underpowered projector
+% \setsansfont[BoldFont={Fira Sans SemiBold}]{Fira Sans Book}
+
+%%% hyperref setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{pdfpagemode=FullScreen,pdffitwindow=true,pdfpagelayout=SinglePage}
+
+%%% metropolis config %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \metroset
+
+%%% Title and authors information %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[Crisis] % (optional, only for long titles)
+{A Fog Computing Prototype}
+\subtitle{Course Project for Big Data Analytics --- Winter 2019}
+\author[Ali, Marco] % (optional, for multiple authors)
+{Ali Alizadeh Mansouri \and Marco Sassano}
+\institute[Concordia University] % (optional)
+{
+    Concordia University\\
+    %   University Here
+    %   \and
+    %   Institute of Theoretical Philosophy\\
+    %   University There
+}
+\date[April 15, 2019] % (optional)
+{April 15, 2019}
+\subject{Course Project for Big Data Analytics --- Winter 2019}
+    
+%%% TOC at each subsection %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \AtBeginSubsection[]
+% {
+%   \begin{frame}
+%     \frametitle{Table of Contents}
+%     \tableofcontents[currentsection,currentsubsection]
+%   \end{frame}
+% }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% begin document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\frame{\titlepage}
+
+%%% TOC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+\end{frame}
+
+% \frame{\sectionpage}
+\section[Section]{My section}
+\subsection[Subsection]{My subsection}
+
+\subsubsection[Subsubsection]{My subsubsection}
+
+
+  \begin{frame}
+    \frametitle{This is the first slide}
+    %Content goes here
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{This is the second slide}
+    \framesubtitle{A bit more information about this}
+
+    \begin{itemize}[<+->]
+      \item The truths of arithmetic which are independent of PA in some 
+      sense themselves `{contain} essentially {\color{blue}{hidden higher-order}},
+       or infinitary, concepts'???
+      \item `Truths in the language of arithmetic which \ldots
+      \item	That suggests stronger version of Isaacson's thesis. 
+      \end{itemize}
+
+    \begin{equation*}
+      \symup{e} = \lim_{n\to \infty} \left(1 + \frac{1}{n}\right)^n
+    \end{equation*}
+    % \pause
+    \begin{equation*}
+      s_{t}=\begin{cases}
+      \bar{s}, & t\in \left\lbrace 0,\dots, T-1\right\rbrace  \\
+      \tilde{s}, & t\geq T Q125\% Question \alpha \gamma \varGamma
+      \end{cases}
+    \end{equation*} 
+    %More content goes here
+  \end{frame}
+% etc
+\end{document}
