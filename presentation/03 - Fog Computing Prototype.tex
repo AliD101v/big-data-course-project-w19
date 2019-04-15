@@ -81,10 +81,10 @@ Numbers={OldStyle, Proportional}
 
 %%% TOC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-    \frametitle{Table of Contents}
-    \tableofcontents
-\end{frame}
+% \begin{frame}
+%     \frametitle{Table of Contents}
+%     \tableofcontents
+% \end{frame}
 
 % introduction
 % problem
@@ -119,7 +119,7 @@ Numbers={OldStyle, Proportional}
     \alert{Internet of Things (IoT)}
     
     \begin{itemize}
-      \item 50 billion devices (sensors, smart phones, smart cities, healthcare, smart vehicles, \ldots) %TODO add cisco reference
+      \item 50 billion devices (sensors, smart phones, smart cities, healthcare, smart vehicles, \ldots)\cite{cisco2011}
       \item 100s of terabytes towards petabytes per day 
       \item {\color{RedOrange}{limited computing resources}}
     \end{itemize} 
@@ -154,22 +154,29 @@ Numbers={OldStyle, Proportional}
   \begin{frame}
     \frametitle{Problem Specification}
     Early detection of epilepsy seizures using EEG timeseries data
-    %todo cite the waterloo thesis
+
+    Inspired by Diab Abdulgalil et. al. \cite{DiabAbdulgalil2018}
 
     \begin{itemize}
       \item Stream processing on the edge
+      \begin{itemize}
+        \item {\color{RedOrange}{Lower accuracy}}, but {\color{OliveGreen}{very high response time}}
+      \end{itemize}
       \item Clustering in the cloud
+      \begin{itemize}
+        \item {\color{RedOrange}{Longer latency and response time}}, but {\color{OliveGreen}{more accurate}}
+      \end{itemize}
     \end{itemize}
   \end{frame}
 
   \begin{frame}
     \frametitle{Dataset}
-  % todo cite the two data refs
-  \begin{itemize}
-    \item \(500\) individuals, each with \(4097\) data points for \(23.5s\) %todo cite the original paper
-    \item \(23 \times 500 = 11500\) records, each record contains \(178\) data points (columns) for \(1\) second
-    \item Restructured to \texttt{(time, value)} tuples to be used as a stream \(\Rightarrow 11500 \times 178 = 2\,047\,000\) tuples (windows of \(178\))
-    \item \(5\) classes \rightarrow \: \(2\) classes (binary)
+    \begin{itemize}            
+      \item Original dataset\cite{PhysRevE.64.061907}: \(500\) individuals, each with \(4097\) data points for \(23.5s\) 
+      
+      \item The UCI Machine Learning Repository version \cite{UCIDataset}: \(23 \times 500 = 11500\) records, each record contains \(178\) data points (columns) for \(1\) second
+      \item Restructured to \texttt{(time, value)} tuples to be used as a stream \(\Rightarrow 11500 \times 178 = 2\,047\,000\) tuples (windows of \(178\))
+      \item \(5\) classes \rightarrow \: \(2\) classes (binary)
   \end{itemize}
 
   \begin{table}
@@ -237,7 +244,7 @@ Numbers={OldStyle, Proportional}
     \frametitle{Stream Processing at the Edge}
     \textbf{Apache Edgent:} Programming model and runtime
 
-    \begin{itemize} % todo use a diagram instead of this list
+    \begin{itemize}
       \item \textbf{Supply} reads the dataset and supplies it as a stream
       \item \textbf{Map} maps the tuples to the selected measure
       \item \textbf{Analysis} classifies the out-of-range \(\Theta\) values
@@ -277,9 +284,14 @@ Numbers={OldStyle, Proportional}
   \subsection{Cloud Computing}
   \begin{frame}
     \frametitle{Clustering in the Cloud}
+    \textbf{Inspirations}
+    \begin{itemize}
+      \item The \textsc{EGADS} anomaly detection library by Yahoo\cite{egads} uses clustering as basis for most of its
+      \item Carney et. al.\cite{Carney2011}
+    \end{itemize}
   
     \metroset{block=fill}
-    \begin{exampleblock}{Selected measure}
+    \begin{exampleblock}{Selected distance measure}
       \begin{equation*}
         s = \sum_{i=2}^{n}{\left|X_i - X_{i-1}\right|}
       \end{equation*}
@@ -302,8 +314,8 @@ Numbers={OldStyle, Proportional}
   \begin{frame}
     \frametitle{Limitations and Future Work}
     \begin{itemize}
-      \item Tests with more than one sensor
-      \item Introducing a publish-subscribe platform such as Apache Kafka, IBM Watson IoT Hub, etc. (e.g. using MQTT as the protocol)
+      \item Experiment with more than one sensor
+      \item Introduce a publish-subscribe platform such as Apache Kafka, IBM Watson IoT Hub, etc. (e.g. using MQTT as the protocol)
     \end{itemize}
     
   
@@ -315,9 +327,18 @@ Numbers={OldStyle, Proportional}
 
 
   %%% Thank you %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+  
   \begin{frame}[standout]
     Thank you!
+  \end{frame}
+  
+  %%% References %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{frame}[allowframebreaks]{References}
+
+    \bibliography{bib}
+    \bibliographystyle{abbrv}
+  
   \end{frame}
 
   % \begin{frame}
