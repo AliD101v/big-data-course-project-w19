@@ -20,12 +20,12 @@ Numbers={OldStyle, Proportional}
 %% some frequently-used commands
 \newcommand{\fslining}[1]{{\addfontfeatures{Numbers=Lining}{#1}}}
 \newcommand{\fssup}[1]{{\addfontfeatures{VerticalPosition=Superior}{#1}}}
+\newcommand{\fssc}[1]{{\addfontfeatures{Letters=SmallCaps}{#1}}}
 %% Language and font encodings
 % supersedes babel, http://www.ctan.org/tex-archive/macros/xetex/latex/polyglossia
 \usepackage{polyglossia} 
 \setdefaultlanguage[]{english}
 
-\usepackage{booktabs}
 % \usepackage{tabu}
 % \usepackage[T1]{fontenc}
 
@@ -33,7 +33,6 @@ Numbers={OldStyle, Proportional}
 %\usepackage[twoside,paperheight=240mm,paperwidth=170mm,centering,height=186mm,width=120mm,outermargin=45mm]{geometry}
 %\usepackage[xetex,twoside,paperheight=240mm,paperwidth=170mm,centering]{geometry}
 \usepackage[letterpaper,xetex,twoside]{geometry}
-
 
 % Some improvements for xetex and latex. Loads fixltx2e, metalogo, xunicode, fontspec.
 % http://mirror.math.ku.edu/tex-archive/macros/latex/contrib/fontspec/fontspec.pdf
@@ -46,7 +45,10 @@ Numbers={OldStyle, Proportional}
 \usepackage{fancyhdr}
 
 %% Useful packages
+\usepackage[font=footnotesize]{caption}
+\usepackage{subcaption}
 \usepackage{graphicx}
+\usepackage{booktabs}
 \usepackage[inline]{enumitem}
 %\usepackage{apacite}
 % \usepackage[colorinlistoftodos]{todonotes}
@@ -86,7 +88,12 @@ urlcolor = blue,          % color of external links
     }
 \date{}
 
+ %%% commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\etal}{\emph{et\,al.}\,}
+% set the paragraph indent to zero,
+% and the paragraph spacing to 0.5\baselineskip
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip}%
 
 \begin{document}
 \maketitle
@@ -100,16 +107,17 @@ Internet of Things (IoT) aims to bring every object (e.g. smart cameras, wearabl
  \section{Introduction}\label{introduction}
 The number of Internet of Things (IoT) devices has increased to a great extent in recent years. It is estimated that 50 billion devices will be connected to the Internet by 2020\,\cite{cisco2011}. On the other end side of the infrastructure, Cloud computing as a paradigm delivers computing services over the Internet --- the Cloud --- to offer flexible resources to deal with a wide range of scalable computational demands. This includes analysis, aggregation, and storage of large volumes of data (Big Data) from the IoT devices. The total Internet bandwidth crossing international borders in 2013 was 100 Tbps. Furthermore, while application demands are growing from 100s of terabytes towards petabytes per day, network capacity growth has been decelerating\,\cite{GlobalAnalytics2015}. In other words, the bottleneck of such infrastructure lies on the network bandwidth between the IoT devices and the Cloud. This issue arises from the fact that most Cloud computing datacenters are geographically centralized, and situated far from the proximity of the end devices.
 
-Fog Computing (FC) was proposed by Cisco in 2012 to address the needs of the applications which demand low latency and high response times\,\cite{cisco2012}. As a distributed computing paradigm, FC acts as an intermediate layer in between Cloud services and IoT devices (or end users/devices in general)\,\cite{Mahmud2018}. In this manner, the concept of FC is analogous to \emph{data locality}, in which computational tasks are moved towards the data, instead of the other way. Figure \ref{fig-fog-computing} shows a typical FC environment.
+Fog Computing (FC) was proposed by Cisco in 2012 to address the needs of the applications which demand low latency and high response times\,\cite{cisco2012}. As a distributed computing paradigm, FC acts as an intermediate layer in between Cloud services and IoT devices (or end users/devices in general)\,\cite{Mahmud2018}. In this manner, the concept of FC is analogous to \emph{data locality}, in which computational tasks are moved towards the data, instead of the other way.
+%  Figure \ref{fig-fog-computing} shows a typical FC environment.
 
 % Moreover, FC facilitates location awareness, mobility support, real-time interactions, scalability and interoperability\,\cite{cisco2012}.
 
-\begin{figure}
-    \label{fig-fog-computing}
-    \centering
-        \includegraphics[width=0.4\textwidth]{figs/Data_Stream_Processing_in_Fog_Computing.pdf}
-    \caption{A Fog Computing environment.}
-  \end{figure}
+% \begin{figure}
+%     \label{fig-fog-computing}
+%     \centering
+%         \includegraphics[width=0.4\textwidth]{figs/Data_Stream_Processing_in_Fog_Computing.pdf}
+%     \caption{A Fog Computing environment.}
+%   \end{figure}
 
 % It is worth mentioning that, FC is sometimes referred to as ``Edge Computing'' in the literature (e.g.\,\cite{Shi2016,GarciaLopez2015}). Certain surveys, on the other hand, treat the two as separate paradigms by considering FC as a generalization of Edge Computing, with Edge Computing representing a set of network devices (including the end devices) not necessarily interacting with the cloud\,\cite{Mahmud2018}. For the sake of clarity, we will use ``FC'' to refer to the paradigm in the focus of this project, as suggested by\,\cite{cisco2012} and\,\cite{Mahmud2018}.
 
@@ -131,52 +139,147 @@ FC in general as well as different applications requiring real-time response tim
  \subsection{Dataset}
  Andrzejak \etal\cite{PhysRevE.64.061907}\footnote{\url{http://epileptologie-bonn.de/cms/front_content.php?idcat=193&lang=3&changelang=3}} provide a dataset of \(500\) individuals, each with \(4097\) data points for \(23.5\) seconds. This dataset is further reshaped and shuffled to \(23 \times 500 = 11500\) records, where each record contains \(178\) data points (features) for \(1\) second by Qiuyi and Fokoue on UCI Machine Learning Repository \cite{UCIDataset}. Each record of this dataset is labeled with one of 5 classes, with one class being the seizure state. Since our goal was predicting the seizures, we further restructured this dataset into \texttt{(time,value)} tuples, and considered the seizure class of consecutive \(178\) tuples as positive, and all the groups tuples belonging to other classes as negative. This resulted in \(11500 \times 178 = 2\,047\,000\) tuples, which would be simulated as a stream of data generated by an EEG sensor. The final breakdown of the dataset is shown in table~\ref{tab.dataset}.
 
- \begin{table}\label{tab.dataset}
-    \centering
-    \caption{The breakdown of the EEG timeseries dataset used.}
-    \addfontfeatures{Numbers={Lining,Tabular}}
-    {\begin{tabular}{@{} lrrr @{}}
-      \toprule
-       & Total & Positive & Negative\\
-      \midrule
-      Training & 7\,000 & 1\,392 & 5\,608\\
-      Test & 4\,500& 908 & 3\,592\\
-      \addlinespace
-      Total & 11\,500 & 2\,300 & 9\,200\\
-      \bottomrule
-    \end{tabular}}
-  \end{table}
+\begin{table}
+  \centering
+  \caption{The breakdown of the EEG timeseries dataset used.}
+  \label{tab.dataset}
+  \addfontfeatures{Numbers={Lining,Tabular}}
+  {\begin{tabular}{@{} lrrr @{}}
+    \toprule
+      & Total & Positive & Negative\\
+    \midrule
+    Training & 7\,000 & 1\,392 & 5\,608\\
+    Test & 4\,500& 908 & 3\,592\\
+    \addlinespace
+    Total & 11\,500 & 2\,300 & 9\,200\\
+    \bottomrule
+  \end{tabular}}
+\end{table}
 
  \subsection{Project Structure}
- We will consider a three-tier infrastructure for our FC implementation, as described below:
+ We will consider a three-tier architecture for our FC implementation, as described below:
 
  \begin{enumerate}
-     \item \textbf{The IoT devices/sensors:} This layer consists of the IoT data generators/producers/sensors. Such devices generate large volumes of data in a small time-frame; however, they usually lack the required processing power, storage, and energy to process this data. They may also expect a response from the higher layers depending on the event inferred from their produced data, for example, in case of a gas/pipe leak sensor.
-     
-     Several IoT hubs and data stream processing frameworks exist, such as Apache Kafka\footnote{\url{https://kafka.apache.org/}}, IBM Watson Internet of Things (IoT)\footnote{\url{https://www.ibm.com/internet-of-things}}, Microsoft Azure IoT Platform\footnote{\url{https://azure.microsoft.com/en-us/overview/iot/}}, etc.
+     \item \textbf{The sensor:} This layer consists of the EEG sensor, which generates streams of tuples in the form of \texttt{(time,value)}.       
 
-     \item \textbf{The Fog layer:} The Fog layer is the intermediate layer between the end devices and the Cloud. Its job is to perform any preliminary analytics on the data, in order to both prevent the whole raw data travel to the Cloud, and to infer any fast responses required by the IoT devices in the lower layer based on the mentioned analysis. The Fog layer may also serve as a resource provisioning coordinator in some applications.
-     
-     At the time of this writing, the only existing framework dedicated to Fog/Edge Computing is Apache Edgent\footnote{\url{http://edgent.apache.org/}}, which is currently in a beta state.
+     \item \textbf{The edge layer:} The edge layer is the intermediate layer between the sensor and the Cloud. Its job is to map and analyze the stream of tuples from the sensor.          
 
-     \item \textbf{The Cloud:} The Fog sends the results of its analyses to the Cloud for further analysis and aggregation. The Cloud may also serve as a coordinator for the bottom two layers, and/or it may send required responses or information to the IoT applications.
-     
-     As the Cloud services have been offered since the 2000s, there is a large number of options, both commercial and open-source. Examples include IBM Bluemix\footnote{\url{https://www.ibm.com/cloud/}}, Microsoft Azure\footnote{\url{https://azure.microsoft.com/}}, Amazon Web Services (AWS)\footnote{\url{https://aws.amazon.com/}}, and Apache Cloudstack\footnote{\url{https://cloudstack.apache.org/}}.
-
-     Our top preference is the open-source solution --- Apache Cloudstack, while we may consider educational services of the other Cloud providers depending on the risks faced in the course of the development of the project.
+     \item \textbf{The cloud:} The cloud in a conventional FC architecture receives the preliminary results of the edge layer for further analysis and aggregation. However, we perform the analytics on the same dataset in the cloud in order to compare the performance of the two layers more accurately in terms of accuracy and resource consumption.
  \end{enumerate}
 
- \subsection{Project Phases}
- We aim to proceed through the following phases for our project. Details are subject to change due to our inexperience with the FC infrastructure. Nevertheless, we believe that we will achieve the following by the end of the project deadline:
+ \subsubsection{The Edge}
+ At the time of this writing, the only existing framework dedicated to Fog/Edge Computing is Apache Edgent\footnote{\url{http://edgent.apache.org/}}, which is currently in a beta state. 
  
- \begin{itemize}
-     \item We plan to develop a functional implementation of the layers described in the previous section in separation first. Since our ultimate goal is to connect each layer functionally, we will choose from the available technologies and frameworks those that we deem will best suit to this end. This phase will also include a good deal of research and experimentation with the available tools and frameworks. Meanwhile, we will also research and define an application use-case to test with our framework. The choice of the application must be approved by the supervisor of the course.
-     \item For the next step, we will connect the three layers with their available APIs, and set up a fully-functioning prototype. This phase will also include part of the debugging of the infrastructure.
-     \item We will implement our application use-case on the developed infrastructure. We plan to analyze the data generated by the IoT devices in the first layer, both on the Fog layer and the Cloud layer. Preferably, the two analyses will be such that the one in the Fog layer is advantageous to the Cloud. For example, we may implement data pre-processing in this layer. The certain types of analyses performed will be both determined by the specific use-case that we come up with, as will as be one mentioned during the lectures (e.g. Random Forests) as required by the project description.
-     \item Finally, we plan to analyze the process, aggregate the results, discuss the challenges and future works, and compile the project report containing all said deliverables.
- \end{itemize}
+ We implemented the sensor and the edge layers using Apache Edgent, which is a program model and runtime environment in Java suitable for stream processing. The sensor is implemented using a \textbf{Supply} class, whose job is to simulate generation of infinite streams of data from a variety of sources, including files, databases, network/internet resources, and physical sensors. In our case, we read the dataset, and output the tuples as a stream.
 
- \clearpage
+The edge layer consists of two parts:
+\begin{itemize}
+  \item \textbf{Map:} As described previously, our goal was to come up with a fast and light-weight detection algorithm. Carney \etal\cite{Carney2011} compared several epilepsy detection algorithms, from simple aggregation-style statistical measures, to more complicated machine learning algorithms such as deep convolutional networks. We experimented and compared the accuracy of the more simpler methods --- to be more consistent with our goal --- such as standardized moments (variance, skewness, kurtosis). Based on analysis of the dataset, we decided that the root of the sum of squared distances between every consecutive pair of tuples best describes the seizure classes of records. We denote this measure using \(\mathcal{D}\), shown in equation~\ref{eq.Delta}. The \(\mathcal{D}\) measure is implemented in the \emph{map} step, which receives streams of tuples from the sensor, and maps them to \texttt{(\(\mathcal{D}\))} tuples as another stream.
+  \begin{equation}
+    \label{eq.Delta}
+    \mathcal{D} = \sqrt{\sum_{i=2}^{n}{(X_i - X_{i-1})^2}}    
+  \end{equation}
+  \item \textbf{Analyze:} This step will classify every window of \(178\) tuples (equivalent to one second of data points) according to a threshold \(\Theta\). The threshold \(\Theta\) is the determined optimal value among different \(\mathcal{D}\) candidates obtained from the previous step on the training phase. Any values of \(\mathcal{D} > \Theta\) will be classified and detected as an indication of seizure on the testing phase.
+\end{itemize}
+
+Figure~\ref{fig.edge-pipeline} shows the described edge pipeline.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/Edgent_pipeline.pdf}
+  \caption{The implemented edge stream processing pipeline.}
+  \label{fig.edge-pipeline}
+\end{figure}
+
+\subsubsection{The Cloud}
+
+The \emph{k-means} algorithm is mentioned as one of the epilepsy seizure detection methods by Carney \etal\cite{Carney2011}. It is also the major method used for anomaly detection in the \fssc{EGADS} EGADS library by Yahoo~\cite{egads}\footnote{\url{https://github.com/yahoo/egads}}. Therefore, we implemented the cloud analytics step using the \emph{k-means} algorithm, with the number of classes/clusters are predetermined in our dataset. We implemented our algorithm using Python on Apache Spark (PySpark) as an efficient parallelized computing framework.
+
+As the measure of distance, we experimented with the Euclidean distance. We also tried transforming data into 178 dimensions. However, we did not achieve a good accuracy due to, what we believe to be, different time intervals present in the dataset. We ultimately selected a distance measure similar to the edge layer, which is the sum of absolute consecutive pairwise differences for each window of 178 tuples, here denoted by \(\mathcal{S}\) and shown in equation~\ref{eq.S}.
+\begin{equation}
+  \label{eq.S}
+  \mathcal{S} = \sum_{i=2}^{n}{\left|X_i - X_{i-1}\right|}
+\end{equation}
+
+\section{Results}
+
+\begin{figure*}
+  \centering
+  \begin{subfigure}[b]{0.475\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{figs/Edge_Training_Results.pdf}
+      \caption[]%
+      {The edge analytics training phase.}    
+      \label{fig:Edge_Training_Results}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.475\textwidth}  
+      \centering 
+      \includegraphics[width=\textwidth]{figs/Edgent_Run_Time_Memory.png}
+      \caption[]%
+      {The edge layer performance.}    
+      \label{fig:Edgent_Run_Time_Memory}
+  \end{subfigure}
+  \vskip\baselineskip
+  \begin{subfigure}[b]{0.475\textwidth}   
+      \centering 
+      \includegraphics[width=\textwidth]{figs/Edge_Test_Results.pdf}
+      \caption[]%
+      {The edge analytics training phase.}    
+      \label{fig:Edge_Test_Results}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[b]{0.475\textwidth}   
+      \centering 
+      \includegraphics[width=\textwidth]{figs/Cloud_Run_Time_Memory.png}
+      \caption[]%
+      {The cloud layer performance.}    
+      \label{fig:Cloud_Run_Time_Memory}
+  \end{subfigure}
+  \caption[  ]
+  {} 
+  \label{fig:compare-edge-training-test-cloud-performance}
+\end{figure*}
+
+
+% \begin{figure}
+%   \centering
+%   \begin{subfigure}[b]{0.5\textwidth}
+%      \includegraphics[width=1\textwidth]{figs/Edge_Training_Results.pdf}
+%      \caption{}
+%      \label{fig:Edge_Training_Results} 
+%   \end{subfigure}
+  
+%   \begin{subfigure}[b]{0.5\textwidth}
+%      \includegraphics[width=1\textwidth]{figs/Edge_Test_Results.pdf}
+%      \caption{}
+%      \label{fig:Edge_Test_Results}
+%   \end{subfigure}
+  
+%   \caption[The edge layer analytics results]{(a) The training phase. (b) The test phase.}
+% \end{figure}
+
+In this section, we demonstrate the results from the analytics of the two layers presented in the previous section, and then compare the performance of the two. The experiments were performed on a PC with a \fslining{Intel Xeon CPU E3-1271 v3 @ 3.6GHz, and 32GB of memory}.
+
+The accuracy, recall, precision, and F1 score for training and test sets for the edge analytics are shown in figures \ref{fig:Edge_Training_Results} and \ref{fig:Edge_Test_Results}, respectively. Based on the training results, we selected a value of \(\Theta = 300\) an optimal balance between accuracy and recall, because in such application we would rather have more false positives (false seizure alarms) than false negatives (missed seizure episodes).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/Threshold.png}
+  \caption{The threshold value of the distance measure versus accuracy for the k-means algorithm of the cloud layer.}
+  \label{fig.cloud-threshold}
+\end{figure}
+
+The threshold value (\(\Theta = 300\)) of the distance measure (\(\mathcal{S}\)) in the k-means algorithm of the cloud layer versus accuracy for test data is displayed in figure~\ref{fig.cloud-threshold}. The results showed that we could achieve higher levels of accuracy as we decreased the threshold/cut-off value for \(\mathcal{S}\) which determines assigning the records to clusters in the k-means algorithm. We selected \(3500\) as an optimal value based on the results of the training phase.
+
+The runtime and memory consumption of the edge and cloud layers for a sample run are shown on figures \ref{fig:Edgent_Run_Time_Memory} and \ref{fig:Cloud_Run_Time_Memory}, respectively.
+
+\section{Discussion}
+
+
+
+% We selected a value of \(\Theta=300\) as a optimal value which best describes the tradeoff between accuracy, recall
+%  \clearpage
 \bibliographystyle{plain}
 \bibliography{refs}
 
